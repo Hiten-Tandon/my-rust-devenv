@@ -1,6 +1,5 @@
 {
-  description =
-    "A Nix flake with a rust environment for data science and visualization";
+  description = "A Nix flake with a rust environment";
 
   inputs = {
     nixpkgs.url =
