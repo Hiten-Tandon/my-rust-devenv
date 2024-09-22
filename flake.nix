@@ -1,5 +1,5 @@
 {
-  description = "A Nix flake with a rust environment";
+  description = "A reusable Rust development environment flake";
 
   inputs = {
     nixpkgs.url =
@@ -11,7 +11,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { system = system; };
       in {
-        devShell = pkgs.mkShell {
+        devShells.default = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [ rustup pkg-config direnv ];
           rustToolchains = [ "stable" "beta" "nightly" ];
           shellHook = ''
@@ -20,8 +20,6 @@
               rustup +$tc component add rust-analyzer
               rustup +$tc component add clippy
             done
-            nu
-            exit
           '';
         };
       });
